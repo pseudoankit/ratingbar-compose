@@ -9,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.unit.IntSize
 
 @Composable
 fun RatingBar(
@@ -19,8 +20,7 @@ fun RatingBar(
 
     Row(
         modifier = Modifier
-            .createRatingBarModifier(config)
-            .onSizeChanged { rowWidth = it.width }
+            .createRatingBarModifier(config) { rowWidth = it.width }
             .pointerInput(Unit) {
                 detectHorizontalDragGestures(
                     onDragEnd = {},
@@ -37,6 +37,10 @@ fun RatingBar(
     }
 }
 
-private fun Modifier.createRatingBarModifier(config: RatingBarConfig) = this
+private fun Modifier.createRatingBarModifier(
+    config: RatingBarConfig,
+    onSizeChanged: (IntSize) -> Unit
+) = this
     .height(config.iconConfig.height)
     .padding(paddingValues = config.padding)
+    .onSizeChanged(onSizeChanged)
