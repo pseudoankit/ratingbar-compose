@@ -1,8 +1,42 @@
 package pseudoankit.droid.rating_bar
 
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onSizeChanged
 
 @Composable
-fun RatingBar() {
+fun RatingBar(
+    config: RatingBarConfig = RatingBarConfig()
+) {
+    var activeIconIndex by remember { mutableStateOf(0) }
+    var rowWidth by remember { mutableStateOf(0) }
 
+    Row(
+        modifier = Modifier
+            .createRatingBarModifier(config)
+            .onSizeChanged { rowWidth = it.width }
+            .pointerInput(Unit) {
+                detectHorizontalDragGestures(
+                    onDragEnd = {},
+                    onDragCancel = {},
+                    onDragStart = {},
+                    onHorizontalDrag = { _, dragAmount: Float ->
+                        //Log.d("RatingBar", "RatingBar: $dragAmount")
+                    }
+                )
+            },
+        horizontalArrangement = Arrangement.Center
+    ) {
+        DrawRatingBarIcons(config, activeIconIndex) { activeIconIndex = it }
+    }
 }
+
+private fun Modifier.createRatingBarModifier(config: RatingBarConfig) = this
+    .height(config.iconConfig.height)
+    .padding(paddingValues = config.padding)
