@@ -24,7 +24,7 @@ internal fun DrawRatingBarIcons(
 }
 
 @Composable
-internal fun RatingBarIcon(
+private fun RatingBarIcon(
     iconConfig: RatingIconConfig, activeIndex: Int, currentIndex: Int, onIconSelected: () -> Unit
 ) {
     when (iconConfig) {
