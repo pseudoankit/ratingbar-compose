@@ -1,6 +1,5 @@
 package pseudoankit.droid.rating_bar
 
-import android.util.Log
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,9 +17,9 @@ const val TAG = "dRatingBar"
 fun RatingBar(
     config: RatingBarConfig = RatingBarConfig()
 ) {
-    var activeIconIndex by remember { mutableStateOf(0) }
+    var activeIcon by remember { mutableStateOf(0) }
     var iconWidth by remember { mutableStateOf(0) }
-    var finalDragAmt by remember { mutableStateOf(0f) }
+    var currentDragAmount by remember { mutableStateOf(0f) }
 
     Box(
         modifier = Modifier
@@ -31,28 +30,23 @@ fun RatingBar(
                 .onSizeChanged { iconWidth = it.width / config.iconCount }
                 .pointerInput(Unit) {
                     detectHorizontalDragGestures(
-                        onDragCancel = {},
-                        onDragEnd = {},
                         onDragStart = {
-                            finalDragAmt = it.x
+                            currentDragAmount = it.x
                         },
                         onHorizontalDrag = { _, dragAmount ->
+                            currentDragAmount += dragAmount
 
-                            finalDragAmt += dragAmount
-                            Log.d("$TAG Dragging", "DragAmount: $finalDragAmt")
+                            val currentIcon = (currentDragAmount / iconWidth).roundToInt()
 
-                            val iconIdx = (finalDragAmt / iconWidth).roundToInt()
-                            Log.d(TAG, "dragIconIdx: $iconIdx")
-
-                            if (iconIdx != activeIconIndex) {
-                                activeIconIndex = iconIdx
+                            if (currentIcon != activeIcon) {
+                                activeIcon = currentIcon
                             }
                         }
                     )
                 },
             horizontalArrangement = Arrangement.Center
         ) {
-            DrawRatingBarIcons(config, activeIconIndex) { activeIconIndex = it }
+            DrawRatingBarIcons(config, activeIcon) { activeIcon = it }
         }
     }
 }
