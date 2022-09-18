@@ -1,4 +1,4 @@
-package pseudoankit.droid.rating_bar
+package pseudoankit.droid.rating_bar.compose
 
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Arrangement
@@ -9,8 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import kotlin.math.roundToInt
-
-const val TAG = "dRatingBar"
 
 @Composable
 fun RatingBar(

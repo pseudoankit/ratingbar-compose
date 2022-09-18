@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import pseudoankit.droid.composeratingbar.ui.theme.ComposeRatingBarTheme
-import pseudoankit.droid.rating_bar.RatingBar
+import pseudoankit.droid.rating_bar.compose.RatingBar
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
