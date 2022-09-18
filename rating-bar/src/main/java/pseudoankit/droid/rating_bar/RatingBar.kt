@@ -4,7 +4,6 @@ import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
@@ -21,10 +20,7 @@ fun RatingBar(
     var iconWidth by remember { mutableStateOf(0) }
     var currentDragAmount by remember { mutableStateOf(0f) }
 
-    Box(
-        modifier = Modifier
-            .height(config.iconConfig.height)
-    ) {
+    Box {
         Row(
             modifier = Modifier
                 .onSizeChanged { iconWidth = it.width / config.iconCount }
