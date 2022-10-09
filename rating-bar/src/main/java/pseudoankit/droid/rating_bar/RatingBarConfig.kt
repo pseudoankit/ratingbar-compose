@@ -6,13 +6,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 /**
- * if client passes both active and inactive image, handle the color
+ *
  */
 data class RatingBarConfig(
     val activeIconIndex: Int = 0,
     val iconConfig: RatingBarIconConfig = RatingBarIconConfig.Default,
     val iconCount: Int = 5,
-    val iconSpacing: Dp = 10.dp,
+    val iconSpacing: Dp = 8.dp,
 ) {
     val iconsCountRange: IntRange = 1..iconCount
 }
