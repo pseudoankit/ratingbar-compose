@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
  */
 data class RatingBarConfig(
     val activeIconIndex: Int = 0,
-    val iconConfig: RatingBarIconConfig = RatingBarIconConfig.Default,
+    val iconConfig: RatingBarIconConfig = RatingBarIconConfig(),
     val iconCount: Int = 5,
     val iconSpacing: Dp = 8.dp,
 ) {
@@ -25,13 +25,24 @@ data class RatingBarIcon(
 data class RatingBarIconConfig(
     val width: Dp = DEFAULT_ICON_SIZE,
     val height: Dp = DEFAULT_ICON_SIZE,
-    val inactive: RatingBarIcon,
-    val active: RatingBarIcon
+    @DrawableRes val inactiveIcon: Int,
+    @DrawableRes val activeIcon: Int,
+    val inactiveColor: Color,
+    val activeColor: Color
 ) {
-    companion object {
-        val Default = RatingBarIconConfig(
-            inactive = RatingBarIcon(color = Color.Gray),
-            active = RatingBarIcon(color = Color.Yellow)
-        )
-    }
+
+    constructor(
+        width: Dp = DEFAULT_ICON_SIZE,
+        height: Dp = DEFAULT_ICON_SIZE,
+        @DrawableRes inactiveIcon: Int,
+        @DrawableRes activeIcon: Int,
+    ) : this(width, height, inactiveIcon, activeIcon, Color.Unspecified, Color.Unspecified)
+
+    constructor(
+        width: Dp = DEFAULT_ICON_SIZE,
+        height: Dp = DEFAULT_ICON_SIZE,
+        @DrawableRes ratingIcon: Int = android.R.drawable.star_off,
+        inactiveColor: Color = Color.Gray,
+        activeColor: Color = Color.Yellow
+    ) : this(width, height, ratingIcon, ratingIcon, inactiveColor, activeColor)
 }
