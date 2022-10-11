@@ -14,17 +14,17 @@ private fun isActive(activeIndex: Int, currentIndex: Int) = currentIndex <= acti
 fun RatingBarIconConfig.getIconColor(
     activeIconIndex: Int, currentIconIndex: Int
 ) = if (isActive(activeIconIndex, currentIconIndex)) {
-    activeColor
+    activeIcon.color
 } else {
-    inactiveColor
+    inactiveIcon.color
 }
 
 fun RatingBarIconConfig.getIconResource(
     activeIndex: Int, currentIndex: Int
 ) = if (isActive(activeIndex, currentIndex)) {
-    activeIcon
+    activeIcon.icon
 } else {
-    inactiveIcon
+    inactiveIcon.icon
 }
 
 fun Modifier.noRippleClick(onClick: () -> Unit) = composed {

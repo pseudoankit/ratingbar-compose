@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import pseudoankit.droid.composeratingbar.ui.theme.ComposeRatingBarTheme
 import pseudoankit.droid.rating_bar.RatingBar
 import pseudoankit.droid.rating_bar.RatingBarConfig
+import pseudoankit.droid.rating_bar.RatingBarIcon
 import pseudoankit.droid.rating_bar.RatingBarIconConfig
 
 class MainActivity : ComponentActivity() {
@@ -92,10 +93,12 @@ fun RatingWithDifferentIconAndDifferentColor() {
     RatingBar(
         config = RatingBarConfig(
             iconConfig = RatingBarIconConfig(
-                inactiveIcon = android.R.drawable.btn_star_big_off,
-                activeColor = Color.Yellow,
-                inactiveColor = Color.Gray,
-                activeIcon = android.R.drawable.ic_dialog_email
+                activeIcon = RatingBarIcon(
+                    color = Color.Yellow, icon = android.R.drawable.ic_dialog_email
+                ),
+                inactiveIcon = RatingBarIcon(
+                    color = Color.Gray, icon = android.R.drawable.stat_notify_chat
+                )
             ),
             activeIconIndex = ratingIcon
         ),

@@ -18,25 +18,16 @@ data class RatingBarConfig(
 }
 
 data class RatingBarIcon(
-    val color: Color = Color.Unspecified,
-    @DrawableRes val icon: Int = android.R.drawable.star_off
+    val color: Color,
+    @DrawableRes val icon: Int
 )
 
 data class RatingBarIconConfig(
     val width: Dp = DEFAULT_ICON_SIZE,
     val height: Dp = DEFAULT_ICON_SIZE,
-    @DrawableRes val inactiveIcon: Int,
-    @DrawableRes val activeIcon: Int,
-    val inactiveColor: Color,
-    val activeColor: Color
+    val inactiveIcon: RatingBarIcon,
+    val activeIcon: RatingBarIcon
 ) {
-
-    constructor(
-        width: Dp = DEFAULT_ICON_SIZE,
-        height: Dp = DEFAULT_ICON_SIZE,
-        @DrawableRes inactiveIcon: Int,
-        @DrawableRes activeIcon: Int,
-    ) : this(width, height, inactiveIcon, activeIcon, Color.Unspecified, Color.Unspecified)
 
     constructor(
         width: Dp = DEFAULT_ICON_SIZE,
@@ -44,5 +35,22 @@ data class RatingBarIconConfig(
         @DrawableRes ratingIcon: Int = android.R.drawable.star_off,
         inactiveColor: Color = Color.Gray,
         activeColor: Color = Color.Yellow
-    ) : this(width, height, ratingIcon, ratingIcon, inactiveColor, activeColor)
+    ) : this(
+        width = width,
+        height = height,
+        activeIcon = RatingBarIcon(color = activeColor, icon = ratingIcon),
+        inactiveIcon = RatingBarIcon(color = inactiveColor, icon = ratingIcon)
+    )
+
+    constructor(
+        width: Dp = DEFAULT_ICON_SIZE,
+        height: Dp = DEFAULT_ICON_SIZE,
+        @DrawableRes inactiveIcon: Int,
+        @DrawableRes activeIcon: Int,
+    ) : this(
+        width = width,
+        height = height,
+        activeIcon = RatingBarIcon(icon = activeIcon, color = Color.Unspecified),
+        inactiveIcon = RatingBarIcon(icon = inactiveIcon, color = Color.Unspecified)
+    )
 }
