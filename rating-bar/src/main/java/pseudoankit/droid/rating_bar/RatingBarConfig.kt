@@ -6,7 +6,14 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 /**
- *
+ * configuration for rating bar
+ * @param[activeIconIndex] index of rating icon to be highlighted initially
+ * activeIconIndex == zero indicated no icons will highlighted
+ * activeIconIndex should be in range 0..iconCount
+ * @param[iconCount] count of rating icon to show
+ * @param[iconSpacing] spacing between two rating icon
+ * @throws[IllegalArgumentException] when activeIconIndex < 0
+ * @throws[IndexOutOfBoundsException] when activeIconIndex not in 0..iconCount
  */
 data class RatingBarConfig(
     val activeIconIndex: Int = 0,
@@ -14,14 +21,23 @@ data class RatingBarConfig(
     val iconCount: Int = 5,
     val iconSpacing: Dp = 8.dp,
 ) {
+
+    init {
+        if (activeIconIndex < 0) throw IllegalArgumentException("activeIconIndex must not be less than zero")
+        if (activeIconIndex > iconCount) throw IndexOutOfBoundsException("activeIconIndex should be in less than equal to iconCount")
+    }
+
     val iconsCountRange: IntRange = 1..iconCount
 }
 
-data class RatingBarIcon(
-    val color: Color,
-    @DrawableRes val icon: Int
-)
 
+/**
+ * configuration for rating bar icon
+ * @param[width] width of each icon
+ * @param[height] height of each icon
+ * @param[inactiveIcon] icon configuration for unselected icon
+ * @param[activeIcon] icon configuration for selected icon
+ */
 data class RatingBarIconConfig(
     val width: Dp = DEFAULT_ICON_SIZE,
     val height: Dp = DEFAULT_ICON_SIZE,
@@ -29,6 +45,13 @@ data class RatingBarIconConfig(
     val activeIcon: RatingBarIcon
 ) {
 
+    /**
+     * @param[width] width of each icon
+     * @param[height] height of each icon
+     * @param[ratingIcon] drawable for a rating icon
+     * @param[inactiveColor] color of icon when inactive
+     * @param[activeColor] color of icon when active
+     */
     constructor(
         width: Dp = DEFAULT_ICON_SIZE,
         height: Dp = DEFAULT_ICON_SIZE,
@@ -42,6 +65,12 @@ data class RatingBarIconConfig(
         inactiveIcon = RatingBarIcon(color = inactiveColor, icon = ratingIcon)
     )
 
+    /**
+     * @param[width] width of each icon
+     * @param[height] height of each icon
+     * @param[inactiveIcon] drawable for rating icon when inactive
+     * @param[activeIcon] drawable for rating icon when active
+     */
     constructor(
         width: Dp = DEFAULT_ICON_SIZE,
         height: Dp = DEFAULT_ICON_SIZE,
@@ -54,3 +83,13 @@ data class RatingBarIconConfig(
         inactiveIcon = RatingBarIcon(icon = inactiveIcon, color = Color.Unspecified)
     )
 }
+
+/**
+ * configuration of each rating bar icon
+ * @param[color] color of a icon
+ * @param[icon] drawable resource for a icon
+ */
+data class RatingBarIcon(
+    val color: Color,
+    @DrawableRes val icon: Int
+)
