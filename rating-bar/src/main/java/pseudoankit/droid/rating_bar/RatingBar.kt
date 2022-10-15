@@ -8,10 +8,16 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import kotlin.math.roundToInt
 
+/**
+ * rating bar for compose
+ * @param[config] rating bar configuration
+ * @param[onIconSelected] callback when active rating icon is changed with current selected rating index as parameter
+ * activeIndex would be in range 1..iconCount from config
+ */
 @Composable
 fun RatingBar(
     config: RatingBarConfig = RatingBarConfig(),
-    onIconSelected: (Int) -> Unit
+    onIconSelected: (activeIndex: Int) -> Unit
 ) {
     var activeIconIndex by remember { mutableStateOf(config.activeIconIndex) }
     var iconWidth by remember { mutableStateOf(0) }
