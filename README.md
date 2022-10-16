@@ -6,16 +6,30 @@ Library to use ratingbar in compose
 
 Add it in your root build.gradle at the end of repositories
 ```
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
+allprojects {
+    repositories { 
+	maven { url 'https://jitpack.io' }
+    }
+}
 ```
 Add the dependency
 ```
-	dependencies {
-	        implementation 'com.github.pseudoankit:RatingBarCompose:Tag'
-	}
+dependencies { implementation 'com.github.pseudoankit:RatingBarCompose:Tag' }
+```
+
+Implementation
+```
+    var ratingIcon by remember { mutableStateOf(0) }
+    RatingBar(
+        config = RatingBarConfig(
+            iconConfig = RatingBarIconConfig(
+                ratingIcon = android.R.drawable.btn_star_big_off,
+                activeColor = Color.Yellow,
+                inactiveColor = Color.Gray
+            ),
+            activeIconIndex = ratingIcon
+        ),
+    ) { activeRatingIndex -> 
+        // TODO
+    }
 ```
