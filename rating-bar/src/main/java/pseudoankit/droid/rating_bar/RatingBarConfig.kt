@@ -1,6 +1,7 @@
 package pseudoankit.droid.rating_bar
 
 import androidx.annotation.DrawableRes
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -12,21 +13,14 @@ import androidx.compose.ui.unit.dp
  * activeIconIndex should be in range 0..iconCount
  * @param[iconCount] count of rating icon to show
  * @param[iconSpacing] spacing between two rating icon
- * @throws[IllegalArgumentException] when activeIconIndex < 0
- * @throws[IndexOutOfBoundsException] when activeIconIndex not in 0..iconCount
  */
+@Immutable
 data class RatingBarConfig(
     val activeIconIndex: Int = 0,
     val iconConfig: RatingBarIconConfig = RatingBarIconConfig(),
     val iconCount: Int = 5,
     val iconSpacing: Dp = 8.dp,
 ) {
-
-    init {
-        if (activeIconIndex < 0) throw IllegalArgumentException("activeIconIndex must not be less than zero")
-        if (activeIconIndex > iconCount) throw IndexOutOfBoundsException("activeIconIndex should be in less than equal to iconCount")
-    }
-
     val iconsCountRange: IntRange = 1..iconCount
 }
 
@@ -38,6 +32,7 @@ data class RatingBarConfig(
  * @param[inactiveIcon] icon configuration for unselected icon
  * @param[activeIcon] icon configuration for selected icon
  */
+@Immutable
 data class RatingBarIconConfig(
     val width: Dp = DEFAULT_ICON_SIZE,
     val height: Dp = DEFAULT_ICON_SIZE,

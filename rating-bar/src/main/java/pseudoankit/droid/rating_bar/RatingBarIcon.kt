@@ -18,7 +18,7 @@ internal fun RatingBarIcon(
         painter = painterResource(
             id = config.getIconResource(activeIconIndex, currentIconIndex)
         ),
-        contentDescription = "RatingIcon$currentIconIndex",
+        contentDescription = "RatingIcon $currentIconIndex",
         tint = config.getIconColor(activeIconIndex, currentIconIndex),
         modifier = Modifier
             .width(config.width)
