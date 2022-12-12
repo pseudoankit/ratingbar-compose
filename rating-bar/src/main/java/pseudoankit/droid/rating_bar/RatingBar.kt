@@ -1,5 +1,7 @@
 package pseudoankit.droid.rating_bar
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
@@ -19,12 +21,14 @@ fun RatingBar(
     config: RatingBarConfig = RatingBarConfig(),
     onIconSelected: (activeIndex: Int) -> Unit
 ) {
-    var activeIconIndex by remember { mutableStateOf(config.activeIconIndex) }
+    var activeIconIndex by remember(config.activeIconIndex) { mutableStateOf(config.activeIconIndex) }
     var iconWidth by remember { mutableStateOf(0) }
     var currentDragAmount by remember { mutableStateOf(0f) }
 
     fun updateSelectedRatingIcon(iconIndex: Int) {
         if (iconIndex == activeIconIndex) return
+
+        Log.d(TAG, "UpdateSelectedRatingIcon: selected: $iconIndex, active : $activeIconIndex")
 
         activeIconIndex = iconIndex
         onIconSelected(iconIndex)
@@ -37,8 +41,8 @@ fun RatingBar(
                 .onSizeChanged { iconWidth = it.width / config.iconCount }
                 .pointerInput(Unit) {
                     detectHorizontalDragGestures(
-                        onDragStart = {
-                            currentDragAmount = it.x
+                        onDragStart = { offset ->
+                            currentDragAmount = offset.x
                         },
                         onHorizontalDrag = { _, dragAmount ->
                             currentDragAmount += dragAmount
