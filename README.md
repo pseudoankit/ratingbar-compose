@@ -14,7 +14,7 @@ allprojects {
 ```
 Add the dependency
 ```
-dependencies { implementation 'com.github.pseudoankit:RatingBarCompose:Tag' }
+dependencies { implementation 'com.github.pseudoankit:RatingBarCompose:v1.2' }
 ```
 
 Implementation
