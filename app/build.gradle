@@ -52,7 +52,7 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
     implementation "androidx.compose.material:material:$compose_ui_version"
 
-    implementation 'com.github.pseudoankit:RatingBarCompose:v1.0'
+    implementation 'io.github.pseudoankit:rating-bar:1.0.0'
 
-    // implementation project(':rating-bar')
+//     implementation project(':rating-bar')
 }
