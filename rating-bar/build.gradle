@@ -3,11 +3,6 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
-apply from: '../gradle/publish-package.gradle'
-ext {
-    ARTIFACT_ID = "rating-bar"
-}
-
 android {
     namespace 'pseudoankit.droid.rating_bar'
     compileSdk 33
