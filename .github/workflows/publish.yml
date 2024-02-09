@@ -17,6 +17,8 @@ jobs:
         with:
           java-version: 17
 
+      - run: chmod +x gradlew
+
       - name: Publish Artifact
         env:
           # fetching the release version tag
@@ -27,6 +29,4 @@ jobs:
           OSS_SIGNING_KEY_ID: ${{ secrets.OSS_SIGNING_KEY_ID }}
           OSS_SIGNING_PASSWORD: ${{ secrets.OSS_SIGNING_PASSWORD }}
           OSS_SIGNING_KEY: ${{ secrets.OSS_SIGNING_KEY }}
-        run: |
-          chmod +x gradlew
-          ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
+        run: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
