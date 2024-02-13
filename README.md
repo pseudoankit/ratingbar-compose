@@ -4,15 +4,16 @@
 
 <img src="https://user-images.githubusercontent.com/54987308/195987064-0797e8b7-9a0e-4eb1-ac41-23478f5e1c8b.gif" width="185" height="400"/>
 
-**Getting Started**
+# Getting Started
+
 Add the dependency in your build.gradle
 ```
 dependencies { implementation 'io.github.pseudoankit:rating-bar:<version 🔝>' }
 ```
 
-Implementation
+# Usage
 ```
-    var ratingIcon by remember { mutableStateOf(0) }
+    var ratingIconIndex by remember { mutableStateOf(0) }
     RatingBar(
         config = RatingBarConfig(
             iconConfig = RatingBarIconConfig(
@@ -23,6 +24,6 @@ Implementation
             activeIconIndex = ratingIcon
         ),
     ) { activeRatingIndex -> 
-        // TODO
+        ratingIconIndex = activeRatingIndex
     }
 ```
